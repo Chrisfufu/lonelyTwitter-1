@@ -6,33 +6,33 @@ import java.util.ArrayList;
  * Created by Ian on 22/03/2016.
  */
 public class TweetList {
-    ArrayList<Tweet> tweets;
+    ArrayList<AbstractTweet> tweets;
 
     public TweetList(){
-        tweets = new ArrayList<Tweet>();
+        tweets = new ArrayList<AbstractTweet>();
     }
 
-    public TweetList(ArrayList<Tweet> t){
+    public TweetList(ArrayList<AbstractTweet> t){
         tweets = t;
     }
 
-    public ArrayList<Tweet> getTweets() {
+    public ArrayList<AbstractTweet> getTweets() {
         return tweets;
     }
 
-    public void add(Tweet tweet){
+    public void add(AbstractTweet tweet){
         tweets.add(tweet);
     }
 
-    public boolean hasTweet(Tweet tweet){
+    public boolean hasTweet(AbstractTweet tweet){
         return tweets.contains(tweet);
     }
 
-    public Tweet getTweet(int index){
+    public AbstractTweet getTweet(int index){
         return tweets.get(index);
     }
 
-    public void delete(Tweet tweet){
+    public void delete(AbstractTweet tweet){
         tweets.remove(tweet);
     }
 

@@ -5,7 +5,6 @@ import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 
 /**
@@ -32,7 +31,8 @@ public class LonelyTwitterActivityUITest extends ActivityInstrumentationTestCase
     private void makeTweet(String text) {
         assertNotNull(activity.findViewById(ca.ualberta.cs.lonelytwitter.R.id.saveButton));
         textInput.setText(text);
-        ((Button) activity.findViewById(ca.ualberta.cs.lonelytwitter.R.id.saveButton)).performClick();
+        // Remove (Button), since it's not necessary
+        (activity.findViewById(ca.ualberta.cs.lonelytwitter.R.id.saveButton)).performClick();
     }
 
     @UiThreadTest
@@ -41,13 +41,13 @@ public class LonelyTwitterActivityUITest extends ActivityInstrumentationTestCase
         int oldLength = lta.getAdapter().getCount();
 
         makeTweet("test string");
-        ArrayAdapter<Tweet> arrayAdapter = lta.getAdapter();
+        ArrayAdapter<AbstractTweet> arrayAdapter = lta.getAdapter();
         assertEquals(oldLength + 1, arrayAdapter.getCount());
 
-        assertTrue("Did you add a Tweet object?",
-                arrayAdapter.getItem(arrayAdapter.getCount() - 1) instanceof Tweet);
+        assertTrue("Did you add a AbstractTweet object?",
+                arrayAdapter.getItem(arrayAdapter.getCount() - 1) instanceof AbstractTweet);
 
-        Tweet tweet = arrayAdapter.getItem(arrayAdapter.getCount() - 1);
+        AbstractTweet tweet = arrayAdapter.getItem(arrayAdapter.getCount() - 1);
         assertEquals("This is not the text we expected!", tweet.getMessage(),
                 "test string");
     }
